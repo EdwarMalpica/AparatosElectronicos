@@ -3,6 +3,12 @@ package com.uptc.frw.aparatoselectronicos.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+
+/**
+ * Clase embebible que representa la clave primaria compuesta para la entidad ComponentApparatus.
+ * Contiene los identificadores de componente y aparato, y es utilizada como id compuesto en la relación débil.
+ * Implementa Serializable y los métodos equals y hashCode para garantizar el correcto funcionamiento en JPA.
+ */
 @Embeddable
 public class ComponentApparatusID implements Serializable {
 
