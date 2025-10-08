@@ -6,6 +6,11 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa la relación entre un aparato y un componente.
+ * Utiliza un identificador compuesto (ComponentApparatusID) como clave primaria.
+ * Incluye información sobre la cantidad, el precio y el fabricante del componente asociado al aparato.
+ */
 @Entity
 @Table(name = "APARATO_COMPONENTE")
 public class ComponentApparatus {
