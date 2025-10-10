@@ -22,10 +22,29 @@ public class Repair {
     @Column ( name = "ID_APARATO")
     private Long apparatusId;
 
-    @Column ( name = "ID_CLIENTE")
+    @Column ( name = "ID_CLIENTE", insertable = false, updatable = false)
     private Long clientId;
 
+    @ManyToOne
+    @JoinColumn (name = "ID_CLIENTE")
+    private Client client;
+
     public Repair() {
+    }
+
+    public Repair(Long id, String description, Date date, Long apparatusId, Client client) {
+        this.id = id;
+        this.description = description;
+        this.date = date;
+        this.apparatusId = apparatusId;
+        this.client = client;
+    }
+
+    public Repair( String description, Date date, Long apparatusId, Client client) {
+        this.description = description;
+        this.date = date;
+        this.apparatusId = apparatusId;
+        this.client = client;
     }
 
     public String getDescription() {
@@ -66,6 +85,14 @@ public class Repair {
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

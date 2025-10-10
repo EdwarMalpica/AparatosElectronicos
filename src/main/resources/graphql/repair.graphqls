@@ -1,0 +1,33 @@
+
+type Repair {
+    id: ID!
+    description: String!
+    date: String!
+    apparatusId: ID!
+    client: Client
+}
+
+extend type Query {
+    getRepairs: [Repair!]!
+    getRepairById(id: ID!): Repair
+}
+
+extend type Mutation {
+
+    createRepair(
+        id: ID
+        description: String!
+        date: String!
+        apparatusId: ID!
+        clientId: ID!
+    ):Repair!
+
+    updateRepair(
+        id: ID!
+        description: String
+        date: String
+        apparatusId: ID!
+        clientId: ID!
+    ): Repair!
+    deleteRepair( id: ID!): Boolean
+}
