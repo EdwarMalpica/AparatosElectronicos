@@ -45,7 +45,7 @@ public class ComponentApparatusDataFetcher {
      * Crea un nuevo ComponentApparatus.
      */
     @MutationMapping
-    public ComponentApparatus createComponentApparatus(Long apparatusId, Long componentId, int quantity, double price, Long manufacturerId) {
+    public ComponentApparatus createComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument int quantity,@Argument double price,@Argument Long manufacturerId) {
         ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
         ComponentApparatus ca = new ComponentApparatus();
         ca.setId(id);
