@@ -1,0 +1,31 @@
+type Manufacturer {
+    id: ID!
+    rif: String!
+    tax_domicile: String!
+    components: [Component!]
+}
+
+# --- Queries ---
+extend type Query {
+    getManufacturers: [Manufacturer!]!
+    getManufacturerById(id: ID!): Manufacturer
+}
+
+# --- Inputs ---
+input CreateManufacturerInput {
+    rif: String!
+    tax_domicile: String!
+}
+
+input UpdateManufacturerInput {
+    id: ID!
+    rif: String!
+    tax_domicile: String!
+}
+
+# --- Mutations ---
+extend type Mutation {
+    createManufacturer(input: CreateManufacturerInput!): Manufacturer!
+    updateManufacturer(input: UpdateManufacturerInput!): Manufacturer!
+    deleteManufacturer(id: ID!): Boolean!
+}
