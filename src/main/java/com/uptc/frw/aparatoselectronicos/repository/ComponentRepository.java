@@ -1,8 +1,8 @@
 package com.uptc.frw.aparatoselectronicos.repository;
 
-import com.uptc.frw.aparatoselectronicos.model.Manufacturer;
+import com.uptc.frw.aparatoselectronicos.model.Component;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> { }
+public interface ComponentRepository extends JpaRepository<Component, Long> {}
