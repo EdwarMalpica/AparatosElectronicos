@@ -14,7 +14,6 @@ type ComponentApparatus {
     id: ComponentApparatusID!
     quantity: Int!
     price: Float!
-    manufacturerId: ID!
 }
 
 input ComponentApparatusIDInput {
@@ -34,16 +33,14 @@ type Mutation {
         apparatusId: ID!,
         componentId: ID!,
         quantity: Int!,
-        price: Float!,
-        manufacturerId: ID!
+        price: Float!
     ): ComponentApparatus!
 
     updateComponentApparatus(
         apparatusId: ID!,
         componentId: ID!,
         quantity: Int,
-        price: Float,
-        manufacturerId: ID
+        price: Float
     ): ComponentApparatus!
     deleteComponentApparatus(apparatusId: ID!, componentId: ID!): Boolean!
 
