@@ -1,0 +1,34 @@
+type Component {
+    id: ID!
+    name: String!
+    specs: String
+    manufacturerId: ID!
+    manufacturer: Manufacturer
+}
+
+# --- Queries ---
+extend type Query {
+    getComponents: [Component!]!
+    getComponentById(id: ID!): Component
+}
+
+# --- Inputs para Mutations ---
+input CreateComponentInput {
+    name: String!
+    specs: String!
+    manufacturerId: ID!
+}
+
+input UpdateComponentInput {
+    id: ID!
+    name: String!
+    specs: String!
+    manufacturerId: ID
+}
+
+# --- Mutations ---
+extend type Mutation {
+    createComponent(input: CreateComponentInput!): Component!
+    updateComponent(input: UpdateComponentInput!): Component!
+    deleteComponent(id: ID!): Boolean!
+}
