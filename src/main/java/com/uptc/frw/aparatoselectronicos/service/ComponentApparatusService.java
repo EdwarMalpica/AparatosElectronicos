@@ -62,4 +62,37 @@ public class ComponentApparatusService {
     public ComponentApparatus updateComponentApparatus(ComponentApparatus componentApparatus) {
         return componentApparatusRepository.save(componentApparatus);
     }
+
+    /**
+     * Obtiene todos los ComponentApparatus.
+     */
+    public List<ComponentApparatus> getAllComponentApparatus() {
+        return findAllComponentApparatus();
+    }
+
+    /**
+     * Obtiene un ComponentApparatus por su ID compuesto.
+     */
+    public ComponentApparatus getComponentApparatusById(ComponentApparatusID id) {
+        return findComponentApparatusById(id);
+    }
+
+    /**
+     * Crea un nuevo ComponentApparatus.
+     */
+    public ComponentApparatus createComponentApparatus(ComponentApparatus componentApparatus) {
+        return saveComponentApparatus(componentApparatus);
+    }
+
+    /**
+     * Actualiza un ComponentApparatus existente, solo los campos no nulos.
+     */
+    public ComponentApparatus updateComponentApparatus(ComponentApparatusID id, Integer quantity, Double price, Long manufacturerId) {
+        ComponentApparatus existing = findComponentApparatusById(id);
+        if (existing == null) return null;
+        if (quantity != null) existing.setQuantity(quantity);
+        if (price != null) existing.setPrice(price);
+        if (manufacturerId != null) existing.setManufacturerId(manufacturerId);
+        return saveComponentApparatus(existing);
+    }
 }
