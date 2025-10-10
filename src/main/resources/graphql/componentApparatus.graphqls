@@ -1,0 +1,46 @@
+"""
+Tipo que representa el identificador compuesto de ComponentApparatus.
+"""
+type ComponentApparatusID {
+    componentId: ID!
+    apparatusId: ID!
+}
+
+"""
+Tipo que representa la relación entre un aparato y un componente.
+"""
+type ComponentApparatus {
+    id: ComponentApparatusID!
+    quantity: Int!
+    price: Float!
+    manufacturerId: ID!
+}
+
+input ComponentApparatusIDInput {
+    componentId: ID!
+    apparatusId: ID!
+}
+
+type Query {
+    getComponentApparatusById(id: ComponentApparatusIDInput!): ComponentApparatus
+    getAllComponentApparatus: [ComponentApparatus!]!
+}
+
+type Mutation {
+    createComponentApparatus(
+        apparatusId: ID!,
+        componentId: ID!,
+        quantity: Int!,
+        price: Float!,
+        manufacturerId: ID!
+    ): ComponentApparatus!
+
+    updateComponentApparatus(
+        apparatusId: ID!,
+        componentId: ID!,
+        quantity: Int,
+        price: Float,
+        manufacturerId: ID
+    ): ComponentApparatus!
+    deleteComponentApparatus(apparatusId: ID!, componentId: ID!): Boolean!
+}
