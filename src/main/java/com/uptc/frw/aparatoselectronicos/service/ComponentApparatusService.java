@@ -87,12 +87,11 @@ public class ComponentApparatusService {
     /**
      * Actualiza un ComponentApparatus existente, solo los campos no nulos.
      */
-    public ComponentApparatus updateComponentApparatus(ComponentApparatusID id, Integer quantity, Double price, Long manufacturerId) {
+    public ComponentApparatus updateComponentApparatus(ComponentApparatusID id, Integer quantity, Double price) {
         ComponentApparatus existing = findComponentApparatusById(id);
         if (existing == null) return null;
         if (quantity != null) existing.setQuantity(quantity);
         if (price != null) existing.setPrice(price);
-        if (manufacturerId != null) existing.setManufacturerId(manufacturerId);
         return saveComponentApparatus(existing);
     }
 }

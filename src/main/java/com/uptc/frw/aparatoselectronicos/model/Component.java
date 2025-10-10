@@ -1,5 +1,6 @@
 package com.uptc.frw.aparatoselectronicos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,14 @@ public class Component {
 
     @Column( name = "ESPECIFICACIONES")
     private String specs;
+
+    @Column(name = "ID_FABRICANTE", insertable = false, updatable = false)
+    private long manufacturerId;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "ID_FABRICANTE")
+    private Manufacturer manufacturer;
 
     public Component() {}
 
@@ -40,6 +49,22 @@ public class Component {
 
     public void setSpecs(String specs) {
         this.specs = specs;
+    }
+
+    public long getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(long manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @Override

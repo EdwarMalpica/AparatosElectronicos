@@ -57,14 +57,13 @@ public class ComponentApparatusDataFetcher {
      * Crea un nuevo ComponentApparatus.
      */
     @MutationMapping
-    public ComponentApparatus createComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument int quantity,@Argument double price,@Argument Long manufacturerId) {
+    public ComponentApparatus createComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument int quantity,@Argument double price) {
         ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
         ComponentApparatus ca = new ComponentApparatus();
         if (service.getComponentApparatusById(id) == null) {
             ca.setId(id);
             ca.setQuantity(quantity);
             ca.setPrice(price);
-            ca.setManufacturerId(manufacturerId);
         }else {
             logger.error("ComponentApparatus already exists for id: {}", id);
         }
@@ -75,13 +74,13 @@ public class ComponentApparatusDataFetcher {
      * Actualiza un ComponentApparatus existente.
      */
     @MutationMapping
-    public ComponentApparatus updateComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument Integer quantity,@Argument Double price,@Argument Long manufacturerId) {
+    public ComponentApparatus updateComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument Integer quantity,@Argument Double price) {
             ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
             if (service.getComponentApparatusById(id) == null) {
                 logger.error("ComponentApparatus not found for id: {}", id);
                 return new ComponentApparatus();
             }
-            return service.updateComponentApparatus(id, quantity, price, manufacturerId);
+            return service.updateComponentApparatus(id, quantity, price);
     }
 
     /**

@@ -21,8 +21,6 @@ public class ComponentApparatus {
     private int quantity;
     @Column(name = "PRECIO")
     private double price;
-    @Column(name = "ID_FABRICANTE")
-    private long manufacturerId;
 
     public ComponentApparatus() {
     }
@@ -51,21 +49,12 @@ public class ComponentApparatus {
         this.price = price;
     }
 
-    public long getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public void setManufacturerId(long manufacturerId) {
-        this.manufacturerId = manufacturerId;
-    }
-
     @Override
     public String toString() {
         return "ComponentApparatus{" +
                 "id=" + id +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", manufacturerId=" + manufacturerId +
                 '}';
     }
 }
