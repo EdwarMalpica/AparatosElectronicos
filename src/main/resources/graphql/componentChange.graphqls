@@ -1,0 +1,42 @@
+
+"""
+Tipo que representa el identificador compuesto de ComponentChange.
+"""
+type ComponentChangeID {
+    componentId: ID!
+    repairId: ID!
+}
+
+"""
+Tipo que representa el cambio de un componente en una reparación.
+"""
+type ComponentChange {
+    id: ComponentChangeID!
+    quantity: Int!
+}
+
+input ComponentChangeIDInput {
+    componentId: ID!
+    repairId: ID!
+}
+
+extend type Query {
+    getComponentChangeById(id: ComponentChangeIDInput!): ComponentChange
+    getAllComponentChanges: [ComponentChange!]!
+}
+
+extend type Mutation {
+    createComponentChange(
+        componentId: ID!,
+        repairId: ID!,
+        quantity: Int!
+    ): ComponentChange!
+
+    updateComponentChange(
+        componentId: ID!,
+        repairId: ID!,
+        quantity: Int
+    ): ComponentChange!
+
+    deleteComponentChange(componentId: ID!, repairId: ID!): Boolean!
+}

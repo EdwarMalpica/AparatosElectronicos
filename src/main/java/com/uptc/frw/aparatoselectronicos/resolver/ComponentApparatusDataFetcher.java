@@ -10,6 +10,8 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Resolver GraphQL para la entidad ComponentApparatus.
@@ -17,6 +19,8 @@ import java.util.List;
  */
 @Controller
 public class ComponentApparatusDataFetcher {
+
+    private static final Logger logger = LoggerFactory.getLogger(ComponentApparatusDataFetcher.class);
 
     @Autowired
     private ComponentApparatusService service;
@@ -26,10 +30,13 @@ public class ComponentApparatusDataFetcher {
      */
     @QueryMapping
     public ComponentApparatus getComponentApparatusById(@Argument ComponentApparatusID id) {
-        System.out.println("[GraphQL] getComponentApparatusById - " + id);
         ComponentApparatus result = service.findComponentApparatusById(id);
-        result.setId(id);
-        System.out.println("[GraphQL] getComponentApparatusById - result: " + result);
+        if (result == null) {
+            logger.warn("ComponentApparatus not found for id: {}", id);
+            result = new ComponentApparatus();
+        }else {
+            result.setId(id);
+        }
         return result;
     }
 
@@ -38,7 +45,12 @@ public class ComponentApparatusDataFetcher {
      */
     @QueryMapping
     public List<ComponentApparatus> getAllComponentApparatus() {
-        return service.findAllComponentApparatus();
+        try {
+            return service.findAllComponentApparatus();
+        } catch (Exception e) {
+            logger.error("Error getting all ComponentApparatus: {}", e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -48,10 +60,14 @@ public class ComponentApparatusDataFetcher {
     public ComponentApparatus createComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument int quantity,@Argument double price,@Argument Long manufacturerId) {
         ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
         ComponentApparatus ca = new ComponentApparatus();
-        ca.setId(id);
-        ca.setQuantity(quantity);
-        ca.setPrice(price);
-        ca.setManufacturerId(manufacturerId);
+        if (service.getComponentApparatusById(id) == null) {
+            ca.setId(id);
+            ca.setQuantity(quantity);
+            ca.setPrice(price);
+            ca.setManufacturerId(manufacturerId);
+        }else {
+            logger.error("ComponentApparatus already exists for id: {}", id);
+        }
         return service.createComponentApparatus(ca);
     }
 
@@ -59,18 +75,28 @@ public class ComponentApparatusDataFetcher {
      * Actualiza un ComponentApparatus existente.
      */
     @MutationMapping
-    public ComponentApparatus updateComponentApparatus(Long apparatusId, Long componentId, Integer quantity, Double price, Long manufacturerId) {
-        ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
-        return service.updateComponentApparatus(id, quantity, price, manufacturerId);
+    public ComponentApparatus updateComponentApparatus(@Argument Long apparatusId,@Argument Long componentId,@Argument Integer quantity,@Argument Double price,@Argument Long manufacturerId) {
+            ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
+            if (service.getComponentApparatusById(id) == null) {
+                logger.error("ComponentApparatus not found for id: {}", id);
+                return new ComponentApparatus();
+            }
+            return service.updateComponentApparatus(id, quantity, price, manufacturerId);
     }
 
     /**
      * Elimina un ComponentApparatus por su ID compuesto.
      */
     @MutationMapping
-    public void deleteComponentApparatus(Long apparatusId, Long componentId) {
-        ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
-        service.deleteComponentApparatus(id);
+    public Boolean deleteComponentApparatus(@Argument Long apparatusId,@Argument Long componentId) {
+            ComponentApparatusID id = new ComponentApparatusID(componentId, apparatusId);
+            if (service.getComponentApparatusById(id) == null) {
+                logger.error("ComponentApparatus not found for id: {}", id);
+            } else {
+                service.deleteComponentApparatus(id);
+                return true;
+            }
+            return false;
     }
 
 }
