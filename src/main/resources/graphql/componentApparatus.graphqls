@@ -22,6 +22,8 @@ input ComponentApparatusIDInput {
     apparatusId: ID!
 }
 
+
+
 type Query {
     getComponentApparatusById(id: ComponentApparatusIDInput!): ComponentApparatus
     getAllComponentApparatus: [ComponentApparatus!]!
@@ -44,4 +46,6 @@ type Mutation {
         manufacturerId: ID
     ): ComponentApparatus!
     deleteComponentApparatus(apparatusId: ID!, componentId: ID!): Boolean!
+
+
 }

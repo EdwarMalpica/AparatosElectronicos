@@ -20,7 +20,7 @@ public class RepairController {
     }
 
     @GetMapping ("/{id}")
-    public  Repair getClients(@PathVariable Long id) {
+    public  Repair getRepair(@PathVariable Long id) {
         return repairService.findRepairById(id);
     }
 

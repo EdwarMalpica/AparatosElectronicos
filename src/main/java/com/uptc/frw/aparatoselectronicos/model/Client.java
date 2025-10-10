@@ -1,6 +1,9 @@
 package com.uptc.frw.aparatoselectronicos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "CLIENTES")
@@ -17,12 +20,21 @@ public class Client {
     private String phoneNumber;
     @Column (name = "EMAIL")
     private String email;
+    @OneToMany (mappedBy = "client")
+    private List<Repair> repairs;
 
     public Client() {
     }
 
     public Client(Long id, String document, String address, String phoneNumber, String email) {
         this.id = id;
+        this.document = document;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public Client( String document, String address, String phoneNumber, String email) {
         this.document = document;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -67,6 +79,14 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
     }
 
     @Override
