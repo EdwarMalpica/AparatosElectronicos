@@ -12,8 +12,9 @@ public class ApplianceType {
     private String name;
     @Column (name = "CARACTERISTICAS")
     private String characteristics;
+
     @Column (name = "ID_TIPO_PADRE")
-    private long idtype;
+    private Long idtype;
 
     public ApplianceType() {
     }
@@ -49,11 +50,11 @@ public class ApplianceType {
         this.characteristics = characteristics;
     }
 
-    public long getIdtype() {
+    public Long getIdtype() {
         return idtype;
     }
 
-    public void setIdtype(long idtype) {
+    public void setIdtype(Long idtype) {
         this.idtype = idtype;
     }
 

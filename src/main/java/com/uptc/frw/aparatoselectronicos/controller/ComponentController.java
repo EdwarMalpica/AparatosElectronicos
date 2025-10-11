@@ -28,7 +28,7 @@ public class ComponentController {
         return componentService.saveComponent(component);
     }
 
-    @PutMapping
+    @PutMapping()
     public Component updateComponent(@RequestBody Component component) {
         return componentService.updateComponent(component);
     }

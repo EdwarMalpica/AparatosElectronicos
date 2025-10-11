@@ -1,10 +1,8 @@
 
 package com.uptc.frw.aparatoselectronicos.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 /**
  * Entidad que representa el cambio de un componente en una reparación.
@@ -21,6 +19,18 @@ public class ComponentChange {
     @Column(name = "CANTIDAD")
     private int quantity;
 
+    @JsonIgnore
+    @ManyToOne
+    @MapsId("componentId")
+    @JoinColumn(name = "ID_COMPONENTE")
+    private Component component;
+
+    @JsonIgnore
+    @ManyToOne
+    @MapsId("repairId")
+    @JoinColumn(name = "ID_REPARACION")
+    private Repair repair;
+
     public ComponentChange() {}
 
     public ComponentChangeID getId() {
@@ -33,6 +43,22 @@ public class ComponentChange {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+
+    public Repair getRepair() {
+        return repair;
+    }
+
+    public void setRepair(Repair repair) {
+        this.repair = repair;
     }
 
     public void setQuantity(int quantity) {
