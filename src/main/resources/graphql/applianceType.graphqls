@@ -1,0 +1,19 @@
+type ApplianceType {
+    id: ID!
+    name: String!
+    characteristics: String
+    idtype: Int
+    parentType: ApplianceType
+    childTypes: [ApplianceType!]
+}
+
+extend type Query {
+    getApplianceTypes: [ApplianceType!]!
+    getApplianceTypeById(id: ID!): ApplianceType
+}
+
+extend type Mutation {
+    createApplianceType(name: String!, characteristics: String, idtype: Int): ApplianceType!
+    updateApplianceType(id: ID!, name: String!, characteristics: String, idtype: Int): ApplianceType!
+    deleteApplianceType(id: ID!): Boolean!
+}
