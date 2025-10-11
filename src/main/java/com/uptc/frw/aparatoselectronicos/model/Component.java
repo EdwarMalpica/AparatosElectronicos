@@ -3,6 +3,8 @@ package com.uptc.frw.aparatoselectronicos.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "COMPONENTES")
 public class Component {
@@ -24,6 +26,11 @@ public class Component {
     @ManyToOne()
     @JoinColumn(name = "ID_FABRICANTE")
     private Manufacturer manufacturer;
+
+    @OneToMany(mappedBy = "component")
+    @JsonIgnore
+    private List<ComponentChange> componentChanges;
+
 
     public Component() {}
 
@@ -65,6 +72,14 @@ public class Component {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public List<ComponentChange> getComponentChanges() {
+        return componentChanges;
+    }
+
+    public void setComponentChanges(List<ComponentChange> componentChanges) {
+        this.componentChanges = componentChanges;
     }
 
     @Override

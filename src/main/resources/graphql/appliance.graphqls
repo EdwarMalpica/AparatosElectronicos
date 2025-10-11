@@ -1,0 +1,20 @@
+type Appliance {
+    id: ID!
+    code: Int!
+    description: String!
+    idtype: Int!
+    applianceType: ApplianceType
+}
+
+# --- Queries ---
+extend type Query {
+    getAppliances: [Appliance!]!
+    getApplianceById(id: ID!): Appliance
+}
+
+# --- Mutations ---
+extend type Mutation {
+    createAppliance(code: Int!, description: String!, idtype: Int!): Appliance!
+    updateAppliance(id: ID!, code: Int!, description: String!, idtype: Int!): Appliance!
+    deleteAppliance(id: ID!): Boolean!
+}

@@ -8,20 +8,13 @@ public class Appliance {
     @Column (name = "ID_APARATO", insertable = false, updatable = false)
     private  Long id;
     @Column (name = "CODE")
-    private long codigo;
+    private long code;
     @Column (name = "DESCRIPCION")
     private String description;
     @Column (name = "ID_TIPO")
     private long idtype;
 
     public Appliance() {
-    }
-
-    public Appliance(Long id, Long codigo, String description, Long idtype) {
-        this.id = id;
-        this.codigo = codigo;
-        this.description = description;
-        this.idtype = idtype;
     }
 
     public Long getId() {
@@ -32,12 +25,12 @@ public class Appliance {
         this.id = id;
     }
 
-    public long getCodigo() {
-        return codigo;
+    public long getCode() {
+        return code;
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
+    public void setCode(long code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -60,7 +53,7 @@ public class Appliance {
     public String toString() {
         return "Appliance{" +
                 "id=" + id +
-                ", codigo=" + codigo +
+                ", code=" + code +
                 ", description='" + description + '\'' +
                 ", idtype=" + idtype +
                 '}';

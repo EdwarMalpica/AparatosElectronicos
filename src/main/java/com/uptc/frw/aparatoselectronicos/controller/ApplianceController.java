@@ -5,9 +5,7 @@ import com.uptc.frw.aparatoselectronicos.model.Appliance;
 import com.uptc.frw.aparatoselectronicos.service.ApplianceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,25 @@ public class ApplianceController {
     public List<Appliance> getAppliances() {
         return applianceService.findAllAppliances();
 
-}
+    }
+
+    @GetMapping("/{id}")
+    public Appliance getApplianceById(@PathVariable Long id) {
+        return applianceService.findApplianceById(id);
+    }
+
+    @PostMapping
+    public Appliance createAppliance(@RequestBody Appliance appliance) {
+        return applianceService.saveAppliance(appliance);
+    }
+
+    @PutMapping("/{id}")
+    public Appliance updateAppliance(@PathVariable long id, @RequestBody Appliance appliance) {
+        return applianceService.updateAppliance(id, appliance);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAppliance(@PathVariable Long id) {
+        applianceService.deleteAppliance(id);
+    }
 }

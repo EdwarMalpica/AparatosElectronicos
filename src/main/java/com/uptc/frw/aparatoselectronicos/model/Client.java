@@ -20,6 +20,7 @@ public class Client {
     private String phoneNumber;
     @Column (name = "EMAIL")
     private String email;
+    @JsonIgnore
     @OneToMany (mappedBy = "client")
     private List<Repair> repairs;
 

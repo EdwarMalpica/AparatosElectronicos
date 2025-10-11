@@ -1,8 +1,10 @@
 package com.uptc.frw.aparatoselectronicos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "REPARACIONES")
@@ -25,9 +27,14 @@ public class Repair {
     @Column ( name = "ID_CLIENTE", insertable = false, updatable = false)
     private Long clientId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn (name = "ID_CLIENTE")
     private Client client;
+
+    @JsonIgnore
+    @OneToMany (mappedBy = "repair")
+    private List<ComponentChange> componentChangeList;
 
     public Repair() {
     }
@@ -93,6 +100,14 @@ public class Repair {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<ComponentChange> getComponentChangeList() {
+        return componentChangeList;
+    }
+
+    public void setComponentChangeList(List<ComponentChange> componentChangeList) {
+        this.componentChangeList = componentChangeList;
     }
 
     @Override
